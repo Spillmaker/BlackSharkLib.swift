@@ -64,7 +64,7 @@ public class BlackSharkLib {
     }
     
     
-    //
+    //	
     // Write
     //
     private static let writeCharacteristicsUUID  = Data([0xA0, 0x01])
@@ -72,15 +72,6 @@ public class BlackSharkLib {
     public static func getWriteCharacteristicsUUID() -> Data {
         // Only one known characteristic for now
         return BlackSharkLib.writeCharacteristicsUUID
-    }
-    
-    
-    public static func getTurnCoolingOffCommand() -> Data {
-        // Sets the load-value to special mode 251.
-        // This mode turns off both cooling and the fan.
-        // This is the only valid way of turning the cooling off.
-        // Do not try to set mode to 100, as that only turns the fan off, risking overheating.
-        return Data([0x05, 0x02, 0x00, 0x00, 0xfb])
     }
     
     public static func getCoolingMetadataCommand() -> Data {
@@ -97,7 +88,25 @@ public class BlackSharkLib {
         return Data([0x05, 0x02, 0x00, 0x00, 0xfa])
     }
     
-    public static func getSetLoadValueCommand(_ percentage: Int) -> Data? {
+    public static func getSetFanSpeedCommand(_ percentage: Int) -> Data? {
+                
+        guard percentage >= 0 && percentage <= 100 else {
+            print("ERROR: Invalid percentage value. Must be between 0 and 100")
+            return nil
+        }
+        
+        // Convert to hex value
+        var hexVal = UInt8(100 - percentage) // Value needs to be inverted.
+        
+        if percentage == 0 {
+            // Off is apparently a custom value
+            hexVal = 0xfb
+        }
+        
+        return Data([0x05, 0x02, 0x00, 0x00, hexVal])
+    }
+    
+    public static func getSetCoolingPowerCommand(_ percentage: Int) -> Data? {
         
         guard percentage >= 0 && percentage <= 100 else {
             print("ERROR: Invalid percentage value. Must be between 0 and 100")
@@ -105,13 +114,14 @@ public class BlackSharkLib {
         }
         
         // Convert to hex value
-        let hexVal = UInt8(100 - percentage) // Value needs to be inverted.
+        var hexVal = UInt8(100 - percentage) // Value needs to be inverted.
         
-        return Data([0x05, 0x02, 0x00, 0x00, hexVal])
-    }
-    
-    init(){
-        print("Hello world!")
+        if percentage == 0 {
+            // Off is apparently a custom value
+            hexVal = 0xfb
+        }
+        
+        return Data([0x05, 0x05, 0x00, 0x00, hexVal])
     }
     
 }
