@@ -9,6 +9,9 @@ BlackSharkLib.swift is a swift-library that enables communication between your a
 Other devces may work, but are not supported. if you want a device supported, please feel free to create a issue and i may look into adding support.
 Priority for adding new supported devices are based of amount of requests and donations.
 
+# Installation
+In Xcode under Project and Package Dependencies add a new pagage and enter the following inthe Search-field:
+```https://github.com/Spillmaker/BlackSharkLib.swift```
 
 # Usage
 - Implement your own BluetoothManager
