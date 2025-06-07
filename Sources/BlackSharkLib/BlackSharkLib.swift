@@ -4,6 +4,9 @@ public class BlackSharkLib {
     
     
     private static let manufacturerDataIdentifier: Data = Data([0x8F, 0x03])
+    public static func isBlackSharkDevice(_ manufacturerData: Data) -> Bool {
+        return manufacturerData.starts(with: manufacturerDataIdentifier)
+    }
     
    
     //
