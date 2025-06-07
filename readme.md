@@ -2,10 +2,7 @@
 
 BlackSharkLib.swift is a swift-library that enables communication between your app and Phone Coolers sold under the Black Shark Brand.
 
-# WIP
-This project is currently a work in progress and is not working yet. (Give me some more days)
-
-## Supported devices
+# Supported devices
 
 - Black Shark MagCooler 4 Pro
 
@@ -13,7 +10,7 @@ Other devces may work, but are not supported. if you want a device supported, pl
 Priority for adding new supported devices are based of amount of requests and donations.
 
 
-## Usage
+# Usage
 - Implement your own BluetoothManager
 - Use the static functions to idenitfy peripheral as a supported device when you are scanning
 - Use the static functions to connect to the proper read and write characteristics.
@@ -21,8 +18,9 @@ Priority for adding new supported devices are based of amount of requests and do
 - Use the static parse-function to parse messages from the read characteristic.
 - Read comments on the functions themselves for more info.
 
-## Support
+# Support
 I dont have the capacity to provide free support.
 If you want me to implement this library into your application, i may be open for work. Feel free to contact me.
 
- 
+
+
