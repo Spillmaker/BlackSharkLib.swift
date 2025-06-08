@@ -20,7 +20,8 @@ public class BlackSharkLib {
     
     public struct CoolingState: Message {
         public let rawData: Data
-        public let temperature: Int
+        public let phoneTemperature: Int
+        public let heatsinkTemperature: Int
     }
     
     public struct FanState: Message {
@@ -53,10 +54,13 @@ public class BlackSharkLib {
         
         // 06 00 - Cooling status
         if data[1] == 0x06 && data[2] == 0x00 {
-            // data[4] == Temperature
-            let temperature = Int(Int8(bitPattern: UInt8(data[4])))
+            // data[4] - Temperature on the Phone side
+            let phoneTemperature = Int(Int8(bitPattern: UInt8(data[4])))
             
-            return CoolingState(rawData: data, temperature: temperature)
+            // data[6] - Temperature on the heatsink
+            let heatsinkTemperature = Int(Int8(bitPattern: UInt8(data[6])))
+            
+            return CoolingState(rawData: data, phoneTemperature: phoneTemperature, heatsinkTemperature: heatsinkTemperature)
         }
         
         // Return generig message
