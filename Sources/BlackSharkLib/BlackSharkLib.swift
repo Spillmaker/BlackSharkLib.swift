@@ -54,11 +54,11 @@ public class BlackSharkLib {
         
         // 06 00 - Cooling status
         if data[1] == 0x06 && data[2] == 0x00 {
-            // data[4] - Temperature on the Phone side
-            let phoneTemperature = Int(Int8(bitPattern: UInt8(data[4])))
+            // data[5] - Temperature on the Phone side
+            let phoneTemperature = Int(Int8(bitPattern: UInt8(data[5])))
             
-            // data[6] - Temperature on the heatsink
-            let heatsinkTemperature = Int(Int8(bitPattern: UInt8(data[6])))
+            // data[7] - Temperature on the heatsink
+            let heatsinkTemperature = Int(Int8(bitPattern: UInt8(data[7])))
             
             return CoolingState(rawData: data, phoneTemperature: phoneTemperature, heatsinkTemperature: heatsinkTemperature)
         }
