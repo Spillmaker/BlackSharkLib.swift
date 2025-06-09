@@ -7,7 +7,11 @@ public class BlackSharkLib {
     public static func isBlackSharkDevice(_ manufacturerData: Data) -> Bool {
         return manufacturerData.starts(with: manufacturerDataIdentifier)
     }
-    
+
+    private static let serviceUUID: UUID = UUID(uuidString: "0000A0A0-3C17-D293-8E48-14FE2E4DA212")!
+    public static func getServiceUUID() -> UUID {
+        return BlackSharkLib.serviceUUID
+    }
    
     //
     // Read
