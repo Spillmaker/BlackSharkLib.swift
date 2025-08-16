@@ -49,6 +49,9 @@ public class BlackSharkLib {
         
         // 02 10 - Fan status
         if data[1] == 0x02 && data[2] == 0x10 {
+            guard data.count > 4 else {
+                return UnknownMessage(rawData: data)
+            }
             // Fan speed is either data[4] or data[5]
             // Both are identical. I suspect one of them are the cooling value, but i dont know how to adjust them independently yet.
             let speed = max(0, min(100, 100 - Int(data[4])))
@@ -58,6 +61,9 @@ public class BlackSharkLib {
         
         // 06 00 - Cooling status
         if data[1] == 0x06 && data[2] == 0x00 {
+            guard data.count > 7 else {
+                return UnknownMessage(rawData: data)
+            }
             // data[5] - Temperature on the Phone side
             let phoneTemperature = Int(Int8(bitPattern: UInt8(data[5])))
             
