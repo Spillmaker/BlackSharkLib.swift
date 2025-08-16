@@ -43,6 +43,9 @@ public class BlackSharkLib {
     }
     
     public static func parseMessages(_ data: Data) -> Message {
+        guard data.count > 2 else {
+            return UnknownMessage(rawData: data)
+        }
         // data[0] is a split. First part of hex is always 8, second half is the lengthbit.
         // data[1-2] is the command (that it responds to)
         // data[3] is a spacer(?) seems to always be 0x00
